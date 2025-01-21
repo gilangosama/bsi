@@ -66,7 +66,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Cara Install 
-1.Run git clone <link-reponya> lalu cd bsi
+- **Run git clone (link-reponya) lalu cd bsi**
+- **Run composer install**
+- **Run npm install**
+- **Run cp .env.example .env**
+- **Run php artisan key:generate**
+- **Run php artisan migrate**
+- **Run php artisan db:seed**
+- **Run php artisan serve**
+- **Run npm run dev**
+- **Go to link localhost:8000**
+
+1.Run git clone (link-reponya) lalu cd bsi
 2.Run composer install
 3.Run npm install
 4.Run cp .env.example .env
