@@ -66,6 +66,13 @@
     </nav>
     <!-- Hero Section -->
     <div class="relative h-[300px] overflow-hidden ">
+        {{-- tombol kembali --}}
+        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span>Kembali</span>
+        </a>
         <div class="absolute inset-0 mx-auto ">
             <img src="img/digital-banking-banner.png" alt="" class="w-full h-full object-cover object-center">
             <div class="absolute inset-0 flex flex-col justify-center px-20 bg-black bg-opacity-40">

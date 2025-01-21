@@ -65,8 +65,15 @@
         </div>
     </nav>
     <!-- Hero Section -->
-    <div class="relative h-[300px] overflow-hidden ">
-        <div class="absolute inset-0 mx-auto ">
+    <div class="relative h-[300px] overflow-hidden">
+        {{-- tombol kembali --}}
+        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span>Kembali</span>
+        </a>
+        <div class="absolute inset-0 mx-auto">
             <img src="img/individu-banner.png" alt="" class="w-full h-full object-cover object-center">
             <div class="absolute inset-0 flex flex-col justify-center px-20 bg-black bg-opacity-40">
                 <h1 class="text-4xl font-bold text-white mb-4">Individu</h1>
@@ -88,11 +95,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Emas</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Gadai Emas</li>
-                        <li>• Cicil Emas</li>
-                        <li>• Titip Emas</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Produk dan layanan Bank Syariah Indonesia (BSI) yang berkaitan dengan emas, seperti tabungan emas, gadai emas, dan pembiayaan emas. 
+                    </p>
                 </div>
 
                 <!-- Jasa -->
@@ -102,11 +107,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Jasa</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Bank Garansi</li>
-                        <li>• Referensi Bank</li>
-                        <li>• Safe Deposit Box</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Berbagai produk dan layanan perbankan yang sesuai dengan prinsip syariah. BSI menawarkan jasa untuk individu, pemilik usaha, dan lainnya. 
+                    </p>
                 </div>
 
                 <!-- Haji & Umrah -->
@@ -116,11 +119,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Haji & Umrah</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Tabungan Haji</li>
-                        <li>• Talangan Haji</li>
-                        <li>• Umrah</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Layanan dari Bank Syariah Indonesia (BSI) yang menyediakan paket umroh dan haji khusus. BSI juga menawarkan tabungan haji dan umroh untuk perencanaan ibadah.
+                    </p>
                 </div>
 
                 <!-- Investasi -->
@@ -130,11 +131,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Investasi</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Deposito</li>
-                        <li>• Reksadana</li>
-                        <li>• Sukuk Ritel</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Layanan investasi yang ditawarkan oleh Bank Syariah Indonesia (BSI). Investasi BSI didasarkan pada prinsip syariah Islam.
+                    </p>
                 </div>
 
                 <!-- Pembiayaan -->
@@ -144,11 +143,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Pembiayaan</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Griya Hasanah</li>
-                        <li>• Oto Hasanah</li>
-                        <li>• Multiguna</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Bentuk pembiayaan yang disediakan oleh lembaga keuangan syariah berdasarkan prinsip-prinsip Islam. Dalam sistem kredit syariah (pembiayaan syariah), pihak bank berperan sebagai pemberi dana atau investor dan pihak nasabah sebagai penerima kredit yang membutuhkan modal.
+                    </p>
                 </div>
                 <!-- Tabungan -->
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
@@ -157,11 +154,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Tabungan</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Easy Wadiah</li>
-                        <li>• Easy Mudharabah</li>
-                        <li>• Pensiun</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        abungan yang ditawarkan oleh Bank Syariah Indonesia (BSI). BSI menawarkan berbagai jenis tabungan, seperti tabungan pelajar, tabungan haji, tabungan rencana, tabungan emas, tabungan efek syariah, dan tabungan bisnis. 
+                    </p>
                 </div>
             </div>
         </div>

@@ -63,6 +63,13 @@
         </nav>
         <!-- Hero Section -->
         <div class="relative h-[300px] overflow-hidden ">
+            {{-- tombol kembali --}}
+        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span>Kembali</span>
+        </a>
             <div class="absolute inset-0 mx-auto ">
                 <img src="img/tarif/info.png" alt="" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0 flex flex-col justify-center px-20 bg-black bg-opacity-40">
@@ -85,11 +92,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Tarif Layanan Bank</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Gadai Emas</li>
-                        <li>• Cicil Emas</li>
-                        <li>• Titip Emas</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Tarif layanan Bank Syariah Indonesia (BSI) meliputi biaya administrasi bulanan, biaya transfer antar bank, dan biaya penarikan tunai di ATM.
+                    </p>
                 </div>
 
                 

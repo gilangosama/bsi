@@ -63,6 +63,13 @@
         </nav>
         <!-- Hero Section -->
         <div class="relative h-[300px] overflow-hidden ">
+            {{-- tombol kembali --}}
+        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span>Kembali</span>
+        </a>
             <div class="absolute inset-0 mx-auto ">
                 <img src="img/individu-banner.png" alt="" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0 flex flex-col justify-center px-20 bg-black bg-opacity-40">
@@ -85,11 +92,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Bewize</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Gadai Emas</li>
-                        <li>• Cicil Emas</li>
-                        <li>• Titip Emas</li>
-                    </ul>
+                    <p class="texl-sm p-6 space-y-2 text-gray-600"> Layanan terintegrasi layanan Cash Management, Value Chain, dan Trade Finance* dalam satu "klik"</p>
                 </div>
 
                 <!-- Tabungan Bisnis -->
@@ -99,11 +102,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Tabungan Bisnis</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Bank Garansi</li>
-                        <li>• Referensi Bank</li>
-                        <li>• Safe Deposit Box</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Tabungan dalam mata uang rupiah yang ditujukan untuk para wirausahawan.Tabungan ini menawarkan berbagai kemudahan, seperti limit transaksi besar, gratis biaya transfer, dan mutasi rekening yang informatif. 
+                    </p>
                 </div>
 
                 <!-- Haji & Umrah -->
@@ -113,11 +114,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Pembiayaan Bisnis</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Tabungan Haji</li>
-                        <li>• Talangan Haji</li>
-                        <li>• Umrah</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Pembiayaan yang disediakan oleh Bank Syariah Indonesia (BSI) untuk memenuhi kebutuhan modal kerja, investasi, dan konsumtif pelaku usaha mikro, kecil, dan menengah (UMKM).
+                    </p>
                 </div>
 
                 <!-- Investasi -->
@@ -127,25 +126,21 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Value Chain</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Deposito</li>
-                        <li>• Reksadana</li>
-                        <li>• Sukuk Ritel</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Layanan online dari Bank Syariah Indonesia (BSI) yang memfasilitasi transaksi value chain.Value chain adalah model bisnis yang menggambarkan bagaimana perusahaan menciptakan nilai bagi pelanggannya.
+                    </p>
                 </div>
 
                 <!-- Pembiayaan -->
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                     <div class="relative w-full h-50 mb-6 rounded-lg overflow-hidden">
-                        <img src="img/bisnis/trade.jpg" alt="trade" class="w-full h-full object-cover">
+                        <img src="img/bisnis/trade.jpg" alt="trade" class="w-full h-64 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Trande Finance</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Griya Hasanah</li>
-                        <li>• Oto Hasanah</li>
-                        <li>• Multiguna</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Layanan yang disediakan oleh Bank Syariah Indonesia (BSI) untuk mendukung transaksi perdagangan.Layanan ini meliputi penerbitan Letter of Credit (LC), Bank Garansi (BG), dan penyelesaian wesel ekspor. 
+                    </p>
                 </div>
                 <!-- Tabungan -->
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
@@ -154,11 +149,9 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/100 to-transparent"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Cash Management</h3>
-                    <ul class="space-y-2 text-gray-600 text-sm p-6">
-                        <li>• Easy Wadiah</li>
-                        <li>• Easy Mudharabah</li>
-                        <li>• Pensiun</li>
-                    </ul>
+                    <p class="space-y-2 text-gray-600 text-sm p-6">
+                        Layanan perbankan online dari Bank Syariah Indonesia (BSI) untuk nasabah non-perorangan. Layanan ini memungkinkan nasabah untuk mengelola keuangan, melakukan transaksi harian, dan mengontrol arus kas
+                    </p>
                 </div>
                 </div>
             </div>
