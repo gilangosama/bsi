@@ -77,7 +77,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - **Run npm run dev**
 - **Go to link localhost:8000**
 
-1.Run git clone (link-reponya) lalu cd bsi
+1.Run git clone (link-reponya) lalu cd Bsi
 2.Run composer install
 3.Run npm install
 4.Run cp .env.example .env
