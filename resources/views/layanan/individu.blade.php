@@ -11,6 +11,7 @@
 
 <body class="antialiased">
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center h-16">
@@ -21,40 +22,54 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    {{-- <div class="relative group">
-                            <button class="flex items-center text-gray-700 hover:text-blue-900 font-medium">
-                                Produk dan Layanan
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                        </div> --}}
                     <a href="/" class="text-gray-700 hover:text-blue-900 font-medium">Dashboard</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Jam Operasional</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
+                    <a href="/#jam-operasional" class="text-gray-700 hover:text-blue-900 font-medium">Jam
+                        Operasional</a>
+                    <a href="/#layanan" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
+                    <a href="/#ulasan" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
                 </div>
 
-                <!-- Right Menu -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg transition-colors">
+                <!-- Right Menu - Desktop -->
+                <div class="hidden md:flex items-center space-x-4">
+                    @if (Auth::guard('admin')->check())
+                    <span class="text-gray-700">Admin Panel</span>
+                    <form method="POST" action="{{ route('admin.logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @elseif (Auth::check())
+                    <span class="text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @else
+                    <a href="{{ route('register') }}"
+                        class="hidden md:flex items-center space-x-2 border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-50 px-6 py-2 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span>Register</span>
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="hidden md:flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                         </svg>
                         <span>Login</span>
                     </a>
-                </div>
-                    {{-- <a href="#" class="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-                            BSI Mobile
-                        </a> --}}
-                    {{-- <a href="">
-                            <img src="img/logo bewize.png" class="h-8" alt="Login">
-                        </a> --}}
+                    @endif
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-blue-900">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-blue-900">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
@@ -62,14 +77,71 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="/" class="text-gray-700 hover:text-blue-900 font-medium">Dashboard</a>
+                    <a href="#jam-operasional" class="text-gray-700 hover:text-blue-900 font-medium">Jam Operasional</a>
+                    <a href="#layanan" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
+                    <a href="#ulasan" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
+
+                    @if (Auth::guard('admin')->check())
+                    <span class="text-gray-700">Admin Panel</span>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @elseif (Auth::check())
+                    <span class="text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @else
+                    <a href="{{ route('register') }}"
+                        class="flex items-center space-x-2 border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-50 px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span>Register</span>
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Login</span>
+                    </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
+
+    <!-- Add JavaScript for mobile menu toggle -->
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+    </script>
     <!-- Hero Section -->
     <div class="relative h-[300px] overflow-hidden">
         {{-- tombol kembali --}}
-        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+        <a href="/"
+            class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             <span>Kembali</span>
         </a>
@@ -96,7 +168,8 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Emas</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        Produk dan layanan Bank Syariah Indonesia (BSI) yang berkaitan dengan emas, seperti tabungan emas, gadai emas, dan pembiayaan emas. 
+                        Produk dan layanan Bank Syariah Indonesia (BSI) yang berkaitan dengan emas, seperti tabungan
+                        emas, gadai emas, dan pembiayaan emas.
                     </p>
                 </div>
 
@@ -108,7 +181,8 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Jasa</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        Berbagai produk dan layanan perbankan yang sesuai dengan prinsip syariah. BSI menawarkan jasa untuk individu, pemilik usaha, dan lainnya. 
+                        Berbagai produk dan layanan perbankan yang sesuai dengan prinsip syariah. BSI menawarkan jasa
+                        untuk individu, pemilik usaha, dan lainnya.
                     </p>
                 </div>
 
@@ -120,7 +194,8 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Haji & Umrah</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        Layanan dari Bank Syariah Indonesia (BSI) yang menyediakan paket umroh dan haji khusus. BSI juga menawarkan tabungan haji dan umroh untuk perencanaan ibadah.
+                        Layanan dari Bank Syariah Indonesia (BSI) yang menyediakan paket umroh dan haji khusus. BSI juga
+                        menawarkan tabungan haji dan umroh untuk perencanaan ibadah.
                     </p>
                 </div>
 
@@ -132,7 +207,8 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Investasi</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        Layanan investasi yang ditawarkan oleh Bank Syariah Indonesia (BSI). Investasi BSI didasarkan pada prinsip syariah Islam.
+                        Layanan investasi yang ditawarkan oleh Bank Syariah Indonesia (BSI). Investasi BSI didasarkan
+                        pada prinsip syariah Islam.
                     </p>
                 </div>
 
@@ -144,7 +220,9 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Pembiayaan</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        Bentuk pembiayaan yang disediakan oleh lembaga keuangan syariah berdasarkan prinsip-prinsip Islam. Dalam sistem kredit syariah (pembiayaan syariah), pihak bank berperan sebagai pemberi dana atau investor dan pihak nasabah sebagai penerima kredit yang membutuhkan modal.
+                        Bentuk pembiayaan yang disediakan oleh lembaga keuangan syariah berdasarkan prinsip-prinsip
+                        Islam. Dalam sistem kredit syariah (pembiayaan syariah), pihak bank berperan sebagai pemberi
+                        dana atau investor dan pihak nasabah sebagai penerima kredit yang membutuhkan modal.
                     </p>
                 </div>
                 <!-- Tabungan -->
@@ -155,7 +233,9 @@
                     </div>
                     <h3 class="text-xl font-semibold text-center mb-2">Tabungan</h3>
                     <p class="space-y-2 text-gray-600 text-sm p-6">
-                        abungan yang ditawarkan oleh Bank Syariah Indonesia (BSI). BSI menawarkan berbagai jenis tabungan, seperti tabungan pelajar, tabungan haji, tabungan rencana, tabungan emas, tabungan efek syariah, dan tabungan bisnis. 
+                        abungan yang ditawarkan oleh Bank Syariah Indonesia (BSI). BSI menawarkan berbagai jenis
+                        tabungan, seperti tabungan pelajar, tabungan haji, tabungan rencana, tabungan emas, tabungan
+                        efek syariah, dan tabungan bisnis.
                     </p>
                 </div>
             </div>

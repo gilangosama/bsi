@@ -11,6 +11,7 @@
 
 <body class="antialiased">
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center h-16">
@@ -21,40 +22,53 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    {{-- <div class="relative group">
-                            <button class="flex items-center text-gray-700 hover:text-blue-900 font-medium">
-                                Produk dan Layanan
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                        </div> --}}
                     <a href="/" class="text-gray-700 hover:text-blue-900 font-medium">Dashboard</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Jam Operasional</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
+                    <a href="/#jam-operasional" class="text-gray-700 hover:text-blue-900 font-medium">Jam Operasional</a>
+                    <a href="/#layanan" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
+                    <a href="/#ulasan" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
                 </div>
 
-                <!-- Right Menu -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg transition-colors">
+                <!-- Right Menu - Desktop -->
+                <div class="hidden md:flex items-center space-x-4">
+                    @if (Auth::guard('admin')->check())
+                    <span class="text-gray-700">Admin Panel</span>
+                    <form method="POST" action="{{ route('admin.logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @elseif (Auth::check())
+                    <span class="text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @else
+                    <a href="{{ route('register') }}"
+                        class="hidden md:flex items-center space-x-2 border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-50 px-6 py-2 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span>Register</span>
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="hidden md:flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                         </svg>
                         <span>Login</span>
                     </a>
-                </div>
-                    {{-- <a href="#" class="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-                            BSI Mobile
-                        </a> --}}
-                    {{-- <a href="">
-                            <img src="img/logo bewize.png" class="h-8" alt="Login">
-                        </a> --}}
+                    @endif
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-blue-900">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-blue-900">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
@@ -62,14 +76,72 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="/" class="text-gray-700 hover:text-blue-900 font-medium">Dashboard</a>
+                    <a href="/#jam-operasional" class="text-gray-700 hover:text-blue-900 font-medium">Jam
+                        Operasional</a>
+                    <a href="/#layanan" class="text-gray-700 hover:text-blue-900 font-medium">Layanan Kami</a>
+                    <a href="/#ulasan" class="text-gray-700 hover:text-blue-900 font-medium">Ulasan</a>
+
+                    @if (Auth::guard('admin')->check())
+                    <span class="text-gray-700">Admin Panel</span>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @elseif (Auth::check())
+                    <span class="text-gray-700">Welcome, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
+                            Logout
+                        </button>
+                    </form>
+                    @else
+                    <a href="{{ route('register') }}"
+                        class="flex items-center space-x-2 border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-50 px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span>Register</span>
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Login</span>
+                    </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
+
+    <!-- Add JavaScript for mobile menu toggle -->
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+    </script>
     <!-- Hero Section -->
     <div class="relative h-[300px] overflow-hidden ">
         {{-- tombol kembali --}}
-        <a href="/" class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
+        <a href="/"
+            class="absolute top-4 left-4 z-10 flex items-center text-white hover:text-gray-200 transition-colors">
             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             <span>Kembali</span>
         </a>
@@ -96,8 +168,10 @@
                 <!-- BYOND by BSI -->
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 mb-6">
-                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">BYOND by BSI</h3>
@@ -107,8 +181,10 @@
                 <!-- BSI QRIS -->
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 mb-6">
-                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">BSI QRIS</h3>
@@ -118,8 +194,10 @@
                 <!-- BSI Tabungan Easy Wadiah -->
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 mb-6">
-                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">BSI Tabungan Easy Wadiah</h3>
@@ -129,19 +207,24 @@
                 <!-- Reksa Dana Syariah -->
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 mb-6">
-                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Reksa Dana Syariah</h3>
-                    <p class="text-gray-600">Investasi lebih mudah untuk masa depan yang lebih berkah #investasimasadepan #berkahnyamaksimal #lebihberkah</p>
+                    <p class="text-gray-600">Investasi lebih mudah untuk masa depan yang lebih berkah
+                        #investasimasadepan #berkahnyamaksimal #lebihberkah</p>
                 </div>
 
                 <!-- e-mas -->
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 mb-6">
-                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <svg class="w-full h-full text-emerald-500" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">e-mas</h3>
